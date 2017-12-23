@@ -1,0 +1,20 @@
+# Maintainer	: Emmett1
+# Description	: A simple, fast and elegant image viewer program
+# Url		: http://xsisqox.github.com/Viewnior/
+# Depends on	: exiv2 gtk gnome-common shared-mime-info
+
+name=viewnior
+version=1.6
+release=3
+source=(https://github.com/xsisqox/Viewnior/archive/$name-$version.tar.gz)
+
+build() {
+	    cd Viewnior-$name-$version
+	./autogen.sh
+	./configure --prefix=/usr \
+		    --mandir=/usr/man
+	make
+	make DESTDIR=$PKG install
+	rm -rf $PKG/usr/share/locale
+	
+}

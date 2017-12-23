@@ -1,0 +1,20 @@
+# Maintainer	: Emmett1
+# Description	: A library for demonstrating how to create delicious ports
+# Url		: http://www.gnu.org/software/somelib/index.html
+# Depends on	: p5-xml-simple
+
+name=icon-naming-utils
+version=0.8.90
+release=1
+source=(http://tango.freedesktop.org/releases/$name-$version.tar.bz2)
+
+build() {
+	    cd $name-$version
+	    
+	    ./configure --prefix=/usr    \
+			--libexecdir=/usr/lib/$name
+	    
+	    make
+	    make DESTDIR=$PKG install
+	    rm -rf $PKG/usr/info
+}

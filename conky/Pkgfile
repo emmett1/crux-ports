@@ -1,0 +1,24 @@
+# Maintainer	: Emmett1
+# Description	: Light-weight system monitor
+# Url		: http://conky.sourceforge.net/
+# Depends on	: curl glib xorg-libxdamage xorg-libxext xorg-libxft wireless-tools
+
+name=conky
+version=1.9.0
+release=1
+source=(http://downloads.sourceforge.net/project/$name/$name/$version/$name-$version.tar.bz2)
+
+build() {
+    cd $name-$version
+    ./configure --prefix=/usr \
+                --mandir=/usr/man \
+                --disable-lua \
+                --enable-xft  \
+                --enable-portmon \
+                --enable-mpd \
+                --enable-rss \
+                --enable-curl \
+		--enable-wlan
+    make
+    make DESTDIR=$PKG install
+}

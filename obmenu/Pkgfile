@@ -1,0 +1,14 @@
+# Maintainer	: Emmett1
+# Description	: Openbox menu editor
+# Url		: http://obmenu.sourceforge.net/
+# Depends on	: python pygtk openbox
+
+name=obmenu
+version=1.0
+release=1
+source=(http://downloads.sourceforge.net/$name/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	python2 setup.py install --root="$PKG" --optimize=1
+}

@@ -1,0 +1,14 @@
+# Maintainer	: Emmett1
+# Description	: CLI script to show your system's info and display an image using w3m.
+# Url		: https://github.com/dylanaraps/neofetch
+# Depends on	: bash
+
+name=neofetch
+version=1.9.1
+release=1
+source=(https://github.com/dylanaraps/$name/archive/$version.tar.gz)
+
+build() {
+	cd $name-$version
+	make DESTDIR=$PKG install
+}

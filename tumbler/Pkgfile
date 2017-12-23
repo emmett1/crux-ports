@@ -1,0 +1,24 @@
+# Maintainer	: Emmett1
+# Description	: D-Bus service for applications to request thumbnails
+# Url		: http://www.xfce.org/
+# Depends on	: dbus-glib gdk-pixbuf curl freetype gst-plugins-base libjpeg-turbo libgsf libpng ffmpegthumbnailer
+
+name=tumbler
+version=0.1.31
+release=3
+source=(http://archive.xfce.org/src/apps/$name/${version%.*}/$name-$version.tar.bz2)
+
+build() {
+	cd $name-$version
+	
+	./configure \
+		--prefix=/usr \
+		--sysconfdir=/etc \
+		--libexecdir=/usr/lib/xfce4 \
+		--disable-static \
+		--disable-debug
+	make	
+	make DESTDIR=$PKG install
+	rm -rf $PKG/usr/share/locale
+	rm -rf $PKG/usr/share/gtk-doc
+}

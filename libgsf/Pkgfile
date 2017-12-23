@@ -1,0 +1,20 @@
+# Maintainer	: Emmett1
+# Description	: The Gnome Structured File Library.
+# Url		: http://freshmeat.net/projects/libgsf/
+# Depends on	: glib libxml2 gdk-pixbuf gobject-introspection
+
+name=libgsf
+version=1.14.40
+release=3
+source=(http://ftp.gnome.org/pub/gnome/sources/$name/1.14/$name-$version.tar.xz)
+
+build() {
+	cd $name-$version
+	./configure \
+		--prefix=/usr \
+		--disable-nls
+	make
+	make DESTDIR=$PKG install
+	rm -rf $PKG/usr/share/locale
+	rm -rf $PKG/usr/share/gtk-doc
+}

@@ -1,0 +1,36 @@
+# Maintainer	: Emmett1
+# Description	: Utility to detect other OSes on a set of drives
+# Url		: http://joey.kitenet.net/code/os-prober
+# Depends on	:	
+
+name=os-prober
+version=1.71
+release=1
+source=(http://ftp.de.debian.org/debian/pool/main/o/$name/${name}_$version.tar.xz)
+
+build() {
+	cd $name-$version
+
+	# adjust lib dir to allow detection of 64-bit distros
+	sed -i -e "s:/lib/ld\*\.so\*:/lib*/ld*.so*:g" os-probes/mounted/common/90linux-distro
+
+	# remove makefile
+	rm -f Makefile
+
+	# Compile newns
+	make newns
+
+	install -Dm755 linux-boot-prober $PKG/usr/bin/linux-boot-prober
+	install -Dm755 $name $PKG/usr/bin/$name
+	install -Dm755 newns $PKG/usr/lib/$name/newns
+	install -Dm755 common.sh $PKG/usr/share/$name/common.sh
+
+	for i in os-probes os-probes/mounted os-probes/init linux-boot-probes linux-boot-probes/mounted; do
+	  install -dm755 $PKG/usr/lib/$i
+	  install -m755 -t $PKG/usr/lib/$i $i/common/*
+	  [[ -d $i/x86 ]] && cp -r $i/x86/* $PKG/usr/lib/$i
+	done
+
+	install -Dm755 os-probes/mounted/powerpc/20macosx $PKG/usr/lib/os-probes/mounted/20macosx
+	install -dm755 $PKG/var/lib/$name	
+}

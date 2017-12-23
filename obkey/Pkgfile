@@ -1,0 +1,16 @@
+# Maintainer	: Emmett1
+# Description	: Openbox Key Editor
+# Url		: http://code.google.com/p/obkey
+# Depends on	: python2 pygtk
+
+name=obkey
+version=1.0
+release=5
+source=(https://github.com/nsf/obkey/archive/v$version.tar.gz)
+
+build() {
+	    cd $name-$version
+	    
+	python2 setup.py install --root=$PKG
+	rm -rf $PKG/usr/share/locale
+}

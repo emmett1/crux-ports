@@ -1,0 +1,18 @@
+# Maintainer	: Emmett1
+# Description	: A fast image manipulation library
+# Url		: http://freshmeat.net/projects/imlib2/
+# Depends on	: freetype libid3tag libpng libtiff giflib xorg-libsm xorg-libxext
+
+name=imlib2
+version=1.4.9
+release=1
+source=(http://download.sourceforge.net/enlightenment/$name-$version.tar.bz2)
+
+build() {
+  cd $name-$version
+
+  ./configure --prefix=/usr
+
+  make
+  make DESTDIR=$PKG install
+}

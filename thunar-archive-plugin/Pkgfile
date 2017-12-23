@@ -1,0 +1,24 @@
+# Maintainer	: Emmett1
+# Description	: A library for demonstrating how to create delicious ports
+# Url		: http://www.gnu.org/software/somelib/index.html
+# Depends on	: thunar hicolor-icon-theme
+
+name=thunar-archive-plugin
+version=0.3.1
+release=2
+source=(http://archive.xfce.org/src/thunar-plugins/$name/0.3/$name-$version.tar.bz2 0001-Fix-file-roller-3.12.1-detection-bug-10826.patch)
+
+build() {
+	cd $name-$version
+	patch -Np1 -i ../0001-Fix-file-roller-3.12.1-detection-bug-10826.patch
+	
+	./configure \
+	--prefix=/usr \
+	--sysconfdir=/etc \
+	--libexecdir=/usr/lib/xfce4 \
+	--localstatedir=/var \
+	--disable-static
+	make
+	make DESTDIR=$PKG install
+	rm -rf $PKG/usr/share/locale
+}

@@ -1,0 +1,28 @@
+# Maintainer	: Emmett1
+# Description	: A Partition Magic clone, frontend to GNU Parted
+# Url		: http://gparted.sourceforge.net
+# Depends on	: parted gtkmm
+
+name=gparted
+version=0.27.0
+release=3
+source=(http://downloads.sourceforge.net/project/$name/$name/$name-$version/$name-$version.tar.gz{,.sig} gparted_polkit org.crux.pkexec.gparted.policy)
+
+build() {
+	cd $name-$version
+	sed -i "s:@gksuprog@ @installdir@/gparted %f:@installdir@/gparted_polkit %f:g" gparted.desktop.in.in
+	./configure --prefix=/usr \
+		    --sbindir=/usr/bin \
+		    --enable-online-resize \
+		    --enable-libparted-dmraid  \
+		    --disable-doc \
+		    --disable-nls
+	    make
+	    make DESTDIR=$PKG install
+
+	install -Dm644 $SRC/org.crux.pkexec.gparted.policy \
+                 $PKG/usr/share/polkit-1/actions/org.crux.pkexec.gparted.policy
+
+	install -m755 $SRC/gparted_polkit \
+                $PKG/usr/bin/gparted_polkit
+}

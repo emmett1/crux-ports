@@ -1,0 +1,19 @@
+# Maintainer	: Emmett1
+# Description	: Programm launcher with autocompletion
+# URL		: http://sf.net/projects/gmrun
+# Depends on	: gtk popt
+
+name=gmrun
+version=0.9.2
+release=1
+source=(http://downloads.sourceforge.net/sourceforge/${name}/${name}-${version}.tar.gz gcc43.patch)
+
+build() {
+    cd $name-$version
+
+    patch -p0 -i ../gcc43.patch
+
+    ./configure --prefix=/usr --disable-nls
+    make
+    make DESTDIR=$PKG install
+}

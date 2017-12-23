@@ -1,0 +1,17 @@
+# Maintainer	: Emmett1
+# Description	: Library implementation of the Media Transfer Protocol
+# Url		: http://www.gnu.org/software/somelib/index.html
+# Depends on	: libusb
+
+name=libmtp
+version=1.1.12
+release=2
+source=(http://downloads.sourceforge.net/$name/$name-$version.tar.gz)
+
+build() {
+	cd $name-$version
+	./configure --prefix=/usr --with-udev=/lib/udev
+	make
+	make DESTDIR=$PKG install
+	#sed -i "/^Unable to open/d" $PKG/etc/udev/rules.d/69-libmtp.rules
+}

@@ -1,0 +1,21 @@
+# Maintainer	: Emmett1
+# Description	: A library for demonstrating how to create delicious ports
+# Url		: http://www.gnu.org/software/somelib/index.html
+# Depends on	: dbus-glib libxfce4util
+
+name=xfconf
+version=4.12.0
+release=2
+source=(http://archive.xfce.org/src/xfce/$name/4.12/$name-$version.tar.bz2)
+
+build() {
+	    cd $name-$version
+	    
+	    ./configure --prefix=/usr
+	    
+	    make
+	    make DESTDIR=$PKG install
+	    rm -rf $PKG/usr/info
+	    rm -rf $PKG/usr/share/locale
+	    rm -rf $PKG/usr/share/gtk-doc
+}

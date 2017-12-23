@@ -1,0 +1,22 @@
+# Maintainer	: Emmett1
+# Description	: A library for demonstrating how to create delicious ports
+# Url		: http://www.gnu.org/software/somelib/index.html
+# Depends on	: libxext pango
+
+name=bmpanel2
+version=2.1pre1
+release=5
+source=(https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/$name/$name-$version.tar.gz)
+
+build() {
+	    cd $name-$version
+	    [ -d bld ] || mkdir bld && cd bld
+
+  cmake .. -DCMAKE_INSTALL_PREFIX=/usr \
+           -DCMAKE_BUILD_TYPE=RELEASE \
+           -DPYTHON_EXECUTABLE=/usr/bin/python2
+  make DESTDIR=$PKG/ install
+
+sed -i 's/env python/&2/' `find $PKG -name "*.py"`
+
+}

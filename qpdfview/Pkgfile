@@ -1,0 +1,22 @@
+# Maintainer	: Emmett1
+# Description	: PDF viewer
+# Url		: https://launchpad.net/qpdfview
+# Depends on	: poppler-qt4
+
+name=qpdfview
+version=0.4.16
+release=1
+source=(https://launchpad.net/qpdfview/trunk/$version/+download/$name-$version.tar.gz)
+
+build () {
+    cd $name-$version
+
+    qmake qpdfview.pro \
+        MANUAL_INSTALL_PATH=/usr/share/man/man1 \
+        CONFIG+="without_ps without_djvu without_cups"
+
+    make
+    make INSTALL_ROOT=$PKG install
+    
+    rm $PKG/usr/share/qpdfview/help_*.html
+}

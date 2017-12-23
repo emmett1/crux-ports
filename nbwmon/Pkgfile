@@ -1,0 +1,18 @@
+# Maintainer	: Emmett1
+# Description	: ncurses bandwidth monitor
+# Url		: https://github.com/causes-/nbwmon
+# Depends on	: ncurses
+
+name=nbwmon
+version=0.5.2
+release=1
+source=(https://github.com/causes-/$name/archive/$version.tar.gz)
+
+build() {
+	cd $name-$version
+
+	make
+    	make DESTDIR=$PKG \
+        	PREFIX=/usr \
+        	install
+}

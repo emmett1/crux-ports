@@ -1,0 +1,10 @@
+drwxr-xr-x	emmett/users	usr/
+drwxr-xr-x	emmett/users	usr/bin/
+-rwxr-xr-x	emmett/users	usr/bin/dmenu
+-rwxr-xr-x	emmett/users	usr/bin/dmenu_run
+-rwxr-xr-x	emmett/users	usr/bin/stest
+drwxr-xr-x	emmett/users	usr/share/
+drwxr-xr-x	emmett/users	usr/share/man/
+drwxr-xr-x	emmett/users	usr/share/man/man1/
+-rw-r--r--	emmett/users	usr/share/man/man1/dmenu.1.gz
+-rw-r--r--	emmett/users	usr/share/man/man1/stest.1.gz

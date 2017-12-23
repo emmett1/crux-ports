@@ -1,0 +1,23 @@
+# Maintainer	: Emmett1
+# Description	: A library for demonstrating how to create delicious ports
+# Url		: http://www.gnu.org/software/somelib/index.html
+# Depends on	: thunar libxfce4ui hicolor-icon-theme
+
+name=thunar-volman
+version=0.8.1
+release=2
+source=(http://archive.xfce.org/src/apps/$name/${version%.*}/$name-$version.tar.bz2)
+
+build() {
+	cd $name-$version
+	./configure \
+	--prefix=/usr \
+	--sysconfdir=/etc \
+	--libexecdir=/usr/lib/xfce4 \
+	--localstatedir=/var \
+	--disable-static \
+	--disable-debug
+	make
+	make DESTDIR=$PKG install
+	rm -rf $PKG/usr/share/locale
+}

@@ -1,0 +1,19 @@
+# Maintainer	: Emmett1
+# Description	: A library for demonstrating how to create delicious ports
+# Url		: http://www.gnu.org/software/somelib/index.html
+# Depends on	: xorg-libxext, xorg-libxt
+
+name=libxmu
+version=1.1.2
+release=2
+source=(http://xorg.freedesktop.org/archive/individual/lib/libXmu-$version.tar.bz2)
+
+build() {
+	    cd libXmu-$version
+	    
+	    ./configure --prefix= \
+            --disable-static
+	    make
+	    make DESTDIR=$PKG install
+	    rm -rf $PKG/share
+}

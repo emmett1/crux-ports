@@ -1,0 +1,16 @@
+# Maintainer	: Emmett1
+# Description	: Arc icon theme
+# Url		: https://github.com/horst3180/arc-icon-theme
+# Depends on	: gtk-update-icon-cache
+
+name=arc-icon-theme
+version=20160605
+release=1
+source=(https://github.com/horst3180/$name/archive/$version.zip)
+
+build() {
+	    cd $name-$version
+	    ./autogen.sh --prefix=/usr
+	make
+	    make DESTDIR=$PKG install
+}

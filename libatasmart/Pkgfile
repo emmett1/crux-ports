@@ -1,0 +1,20 @@
+# Maintainer	: Emmett1
+# Description	: ATA S.M.A.R.T. Reading and Parsing Library
+# Url		: http://0pointer.de/blog/projects/being-smart.html
+
+name=libatasmart
+version=0.19
+release=2
+source=(http://0pointer.de/public/$name-$version.tar.xz)
+
+build() {
+	    cd $name-$version
+
+	    ./configure --prefix=/usr \
+			--disable-static
+
+	    make
+	    make DESTDIR=$PKG install
+	    rm -rf $PKG/usr/info
+	    rm -rf $PKG/usr/share/doc
+}

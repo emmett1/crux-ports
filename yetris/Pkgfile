@@ -1,0 +1,17 @@
+# Maintainer	: Emmett1
+# Description	: Customizable Tetris clone for the terminal 
+# Url		: http://yetris.alexdantas.net/
+# Depends on	: ncurses
+
+name=yetris
+version=2.3.0
+release=1
+source=(https://github.com/alexdantas/$name/archive/v$version.tar.gz)
+
+build() {
+	cd $name-$version
+	
+	make
+	make DESTDIR=$PKG PREFIX=/usr install
+	rm -rf $PKG/usr/info
+}

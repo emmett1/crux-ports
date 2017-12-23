@@ -1,0 +1,15 @@
+# Maintainer	: Emmett1
+# Description	: Userspace tool to query and toggle rfkill switches
+# Url		: http://wireless.kernel.org/en/users/Documentation/rfkill
+# Depends on	:
+
+name=rfkill
+version=0.5
+release=1
+source=(http://www.kernel.org/pub/software/network/$name/$name-$version.tar.xz)
+
+build() {
+	cd $name-$version
+	make
+	make DESTDIR=$PKG install 
+}

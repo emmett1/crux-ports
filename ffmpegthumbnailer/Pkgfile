@@ -1,0 +1,26 @@
+# Maintainer	: Emmett1
+# Description	: Lightweight video thumbnailer that can be used by file managers
+# Url		: https://github.com/dirkvdb/ffmpegthumbnailer
+# Depends on	: ffmpeg libjpeg-turbo libpng
+
+name=ffmpegthumbnailer
+version=2.1.1
+release=1
+source=(https://github.com/dirkvdb/$name/archive/$version.tar.gz)
+
+build() {
+	cd $name-$version
+
+	mkdir -p build
+	cd build
+	cmake .. \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_INSTALL_PREFIX=/usr \
+		-DCMAKE_INSTALL_LIBDIR=lib \
+		-DENABLE_GIO=ON \
+		-DENABLE_THUMBNAILER=ON
+	make
+
+	make DESTDIR=$PKG install
+	rm -rf $PKG/usr/info
+}

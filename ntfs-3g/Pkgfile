@@ -1,0 +1,36 @@
+# Description: Freely available NTFS driver with read and write support.
+# URL: http://www.tuxera.com/community/ntfs-3g-download/
+# Maintainer: Danny Rawlins, crux at romster dot me
+# Packager: Danny Rawlins, crux at romster dot me
+# Depends on: fuse
+
+name=ntfs-3g
+version=2016.2.22
+release=3
+source=(http://tuxera.com/opensource/ntfs-3g_ntfsprogs-$version.tgz)
+
+build() {
+	cd ntfs-3g_ntfsprogs-$version
+
+	install -d $PKG/lib
+
+	./configure \
+		--prefix=/usr \
+		--disable-ldconfig \
+		--with-fuse=external \
+		--enable-posix-acls \
+		--enable-extras
+
+	make
+	make DESTDIR=$PKG install
+
+	ln -s ../bin/ntfs-3g $PKG/sbin/mount.ntfs
+	ln -s ../bin/ntfsfix $PKG/sbin/fsck.ntfs
+
+	ln -s ntfs-3g.8 $PKG/usr/share/man/man8/mount.ntfs.8
+	ln -s ntfsfix.8 $PKG//usr/share/man/man8/fsck.ntfs.8
+
+	chmod -v 4755 $PKG/sbin/mount.ntfs
+
+	rm -r $PKG/usr/share/doc
+}

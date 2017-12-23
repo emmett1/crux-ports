@@ -1,0 +1,22 @@
+# Maintainer	: Emmett1
+# Description	: Legacy polkit authentication agent for GNOME
+# Url		: http://www.freedesktop.org/wiki/Software/polkit/
+# Depends on	: polkit gtk3
+
+name=polkit-gnome
+version=0.105
+release=3
+source=(http://ftp.gnome.org/pub/gnome/sources/$name/$version/$name-$version.tar.xz)
+
+build() {
+	    cd $name-$version
+	    ./configure --prefix=/usr \
+			--sysconfdir=/etc \
+	    		--localstatedir=/var \
+			--libexecdir=/usr/lib/polkit-gnome \
+			--disable-nls
+	    make
+	    make DESTDIR=$PKG install
+	    rm -rf $PKG/usr/share/locale
+		
+}

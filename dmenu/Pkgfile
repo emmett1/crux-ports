@@ -1,0 +1,19 @@
+# Maintainer	: Emmett1
+# Description	: Dynamic X menu - with xft, mouse, height, history, and fuzzy search support
+# Url		: http://tools.suckless.org/dmenu/
+# Depends on	: xorg-libxft xorg-libxinerama
+
+name=dmenu
+version=4.5
+release=1
+source=(http://dl.suckless.org/tools/dmenu-$version.tar.gz "${patches[@]}")
+
+build() {
+	cd $name-$version
+	for patch in "${patches[@]}"; do
+		echo "Patching $patch"
+		patch -p1 < "../${patch}"
+	done
+	make
+	make DESTDIR=$PKG PREFIX=/usr install
+}
