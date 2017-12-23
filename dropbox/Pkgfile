@@ -6,6 +6,7 @@
 name=dropbox
 version=40.4.46
 release=1
+PKGMK_NO_STRIP=yes
 source=(https://d1ilhw0800yew8.cloudfront.net/client/$name-lnx.x86_64-$version.tar.gz
 	dropbox.desktop
 	dropbox.png)
