@@ -1,5 +1,5 @@
 # Description	: 64-Bit optimized Firefox, no data collection, allows unsigned extensions
-# Depends on	: xorg-libxt libnotify nss gtk2 gtk3 sqlite dbus-glib
+# Depends on	: xorg-libxt libnotify nss gtk gtk3 sqlite3 dbus-glib
 
 name=waterfox-bin
 version=56.0.1
