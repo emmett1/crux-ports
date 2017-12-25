@@ -1,12 +1,12 @@
 # Maintainer	: Emmett1
 # Description	: Open source fonts with metric compatibility with Microsoft fonts
-# Url		: https://fedorahosted.org/liberation-fonts/
+# Url		: https://www.redhat.com/promo/fonts/
 # Depends on	:
 
 name=liberation-fonts
 version=2.00.1
-release=3
-source=(https://fedorahosted.org/releases/l/i/$name/$name-ttf-$version.tar.gz \
+release=1
+source=(https://releases.pagure.org/liberation-fonts/liberation-fonts-ttf-$version.tar.gz \
 	30-0-liberation-mono.conf \
         30-0-liberation-sans.conf \
         30-0-liberation-serif.conf)
